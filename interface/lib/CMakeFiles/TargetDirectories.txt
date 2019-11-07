@@ -1,3 +1,0 @@
-/home/ninn/jnidemo/interface/lib/CMakeFiles/rebuild_cache.dir
-/home/ninn/jnidemo/interface/lib/CMakeFiles/OsiInterface.dir
-/home/ninn/jnidemo/interface/lib/CMakeFiles/edit_cache.dir

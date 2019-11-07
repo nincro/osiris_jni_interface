@@ -1,4 +1,0 @@
-/home/ninn/jnidemo/interface/target/CMakeFiles/rebuild_cache.dir
-/home/ninn/jnidemo/interface/target/CMakeFiles/edit_cache.dir
-/home/ninn/jnidemo/interface/target/CMakeFiles/OsiInterface.dir
-/home/ninn/jnidemo/interface/target/CMakeFiles/Osiris.dir
