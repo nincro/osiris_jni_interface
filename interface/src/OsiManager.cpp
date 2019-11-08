@@ -526,7 +526,7 @@ namespace osiris
 			}
 		}
 
-
+		cout << "[o] load image" << endl;
 
 
 		/////////////////////////////////////////////////////////////////
@@ -550,6 +550,8 @@ namespace osiris
 				rEye.initMask();
 			}*/
 		}
+
+		cout << "[o] segment image" << endl;
 
 		// Load parameters
 		if (mInputDirParameters != "")
