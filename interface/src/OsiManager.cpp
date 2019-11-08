@@ -829,7 +829,7 @@ namespace osiris
 	{
 		cout << endl;
 		cout << "================" << endl;
-		cout << "Start processing" << endl;
+		cout << "std::string OsiManager::getCode("<< img_rdir << ")" << endl;
 		cout << "================" << endl;
 		cout << endl;
 
