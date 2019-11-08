@@ -100,11 +100,7 @@ JNIEXPORT void JNICALL Java_Demo_sayHello
 }
 int main (int argc, char * argv[])
 {
-	OsiManager osi;
-	osi.loadConfiguration("data");
-	osi.showConfiguration();
-	osi.getCode("0000_000.bmp");
-	osi.run();
+	
     return 0 ;
 
 }

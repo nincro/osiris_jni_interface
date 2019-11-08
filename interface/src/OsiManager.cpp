@@ -62,7 +62,7 @@ namespace osiris
         mMapString["Suffix for iris codes"] = &mSuffixIrisCodes ;
 
         // Initialize all parameters
-        initConfiguration() ;        
+        //initConfiguration() ;        
     }
 
 
@@ -232,9 +232,12 @@ namespace osiris
             }
         }
 
+		if(file)
+			file.close();
+
         
         // Load the list containing all images
-        loadListOfImages() ;
+        //loadListOfImages() ;
 
         // Load the datas for Gabor filters
         if ( mProcessEncoding && mFilenameGaborFilters != "" )
