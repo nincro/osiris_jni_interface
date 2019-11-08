@@ -62,7 +62,7 @@ namespace osiris
         mMapString["Suffix for iris codes"] = &mSuffixIrisCodes ;
 
         // Initialize all parameters
-        //initConfiguration() ;        
+        initConfiguration() ;        
     }
 
 
