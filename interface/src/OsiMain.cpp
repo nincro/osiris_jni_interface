@@ -87,10 +87,19 @@ using namespace osiris ;
 /**
 */
 std::string getCode(std::string img_rdir) {
-	OsiManager osi;
-	osi.loadConfiguration("data");
-	//osi.showConfiguration();
-	//osi.getCode(img_rdir);
+	try
+	{
+		OsiManager osi;
+		osi.loadConfiguration("data");
+		//osi.showConfiguration();
+		//osi.getCode(img_rdir);
+	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+
+	return NULL;
 }
 
 JNIEXPORT void JNICALL Java_Demo_sayHello
