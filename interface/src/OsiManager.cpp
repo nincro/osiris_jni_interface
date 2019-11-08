@@ -852,49 +852,6 @@ namespace osiris
 	}
 
 
-	std::string OsiManager::osiDetect(std::string img_rdir)
-	{
-		osiris::OsiEye eye;
-		if (mInputDirOriginalImages != "")
-		{
-			eye.loadOriginalImage(mInputDirOriginalImages + img_rdir);
-		}
-		else
-		{
-			throw runtime_error("Cannot segmente/normalize without loading original image");
-		}
-		
-		return eye.mySegment(mMinIrisDiameter, mMinPupilDiameter, mMaxIrisDiameter, mMaxPupilDiameter);
-		
-		
-
-	}
-
-	std::string OsiManager::osiGetMask(std::string img_rdir, std::string eye_info)
-	{
-		
-
-		osiris::OsiCircle pupil;
-		osiris::OsiCircle iris;
-		osiris::OsiStringUtils utils;
-		std::vector<std::string> infos = utils.split(eye_info, ',');
-		pupil.setCircle(cvPoint(utils.str2int(infos[0]), utils.str2int(infos[1])), utils.str2int(infos[2]));
-		iris.setCircle(cvPoint(utils.str2int(infos[3]), utils.str2int(infos[4])), utils.str2int(infos[5]));
-
-
-		osiris::OsiEye eye;
-		if (mInputDirOriginalImages != "")
-		{
-			eye.loadOriginalImage(mInputDirOriginalImages + img_rdir);
-		}
-		else
-		{
-			throw runtime_error("Cannot segmente/normalize without loading original image");
-		}
-		
-		return std::string();
-	}
-
 } // end of namespace
 
 

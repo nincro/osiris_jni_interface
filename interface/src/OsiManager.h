@@ -63,9 +63,7 @@ namespace osiris
         void run ( ) ;
 		std::string getCode(std::string img_rdir);
 
-		std::string osiDetect(std::string img_rdir);
-
-		std::string osiGetMask(std::string img_rdir, std::string eye_info);
+		
     private :
 
         // Commands
