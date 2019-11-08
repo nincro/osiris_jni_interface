@@ -78,27 +78,7 @@
 
 
 using namespace osiris ;
-/***
-	return 
-*/
-std::string detect(std::string img_rdir) {
-	try
-	{
-		OsiManager osi;
-		osi.loadConfiguration("data");
-		osi.showConfiguration();
 
-		return osi.osiDetect(img_rdir);
-
-		osi.run() ;
-	}
-	catch (std::exception & e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-
-	return NULL;
-}
 
 std::string getCode(std::string img_rdir);
 
@@ -114,7 +94,7 @@ std::string getCode(std::string img_rdir) {
 	OsiManager osi;
 	osi.loadConfiguration("data");
 	osi.showConfiguration();
-	osi.getCode(img_rdir);
+	//osi.getCode(img_rdir);
 }
 
 int main (int argc, char * argv[])
