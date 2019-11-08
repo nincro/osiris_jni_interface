@@ -100,7 +100,7 @@ std::string detect(std::string img_rdir) {
 	return NULL;
 }
 
-
+std::string getCode(std::string img_rdir);
 
 JNIEXPORT void JNICALL Java_Demo_sayHello
   (JNIEnv *, jclass){
@@ -119,7 +119,7 @@ std::string getCode(std::string img_rdir) {
 
 int main (int argc, char * argv[])
 {
-	detect("0000_000.bmp");
+	
 
     return 0 ;
 
