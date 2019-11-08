@@ -439,6 +439,26 @@ namespace osiris
         return score ;
     }
 
+	void OsiEye::setNormalizedMaskRdir(std::string rdir)
+	{
+		normalized_mask_rdir = rdir;
+	}
+
+	void OsiEye::setCodeRdir(std::string rdir)
+	{
+		code_rdir = rdir;
+	}
+
+	std::string OsiEye::getNormalizedMaskRdir()
+	{
+		return normalized_mask_rdir;
+	}
+
+	std::string OsiEye::getCodeRdir()
+	{
+		return code_rdir;
+	}
+
 
 
 } // end of namespace

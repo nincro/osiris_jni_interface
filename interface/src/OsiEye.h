@@ -184,7 +184,17 @@ namespace osiris
         */
         float match ( OsiEye & rEye , const CvMat * pApplicationPoints ) ;
 
+
+		void setNormalizedMaskRdir(std::string rdir);
+		void setCodeRdir(std::string rdir);
+
+		std::string getNormalizedMaskRdir();
+		std::string getCodeRdir();
+
     private :
+
+		std::string normalized_mask_rdir;
+		std::string code_rdir;
 
         /** The original image corresponding to the eye (input only). */
         IplImage * mpOriginalImage ;

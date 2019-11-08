@@ -526,7 +526,6 @@ namespace osiris
 			}
 		}
 
-		cout << "[o] load image" << endl;
 
 
 		/////////////////////////////////////////////////////////////////
@@ -539,19 +538,19 @@ namespace osiris
 			rEye.segment(mMinIrisDiameter, mMinPupilDiameter, mMaxIrisDiameter, mMaxPupilDiameter);
 
 			// Save segmented image
-			/*if (mOutputDirSegmentedImages != "")
+			if (mOutputDirSegmentedImages != "")
 			{
 				rEye.saveSegmentedImage(mOutputDirSegmentedImages + short_name + mSuffixSegmentedImages);
-			}*/
+			}
 
 			// If user don't want to use the mask provided by Osiris
-			/*if (!mUseMask)
+			if (!mUseMask)
 			{
 				rEye.initMask();
-			}*/
+			}
 		}
 
-		cout << "[o] segment image" << endl;
+		//cout << "[o] segment image" << endl;
 
 		// Load parameters
 		if (mInputDirParameters != "")
@@ -627,7 +626,7 @@ namespace osiris
 				rEye.saveParameters(mOutputDirParameters + short_name + mSuffixParameters);
 			}
 		}
-		cout << "[o] saveParameters " << endl;
+		
 		// Save mask
 		if (mOutputDirMasks != "")
 		{
@@ -848,7 +847,7 @@ namespace osiris
 		}*/
 		OsiEye eye;
 		processOneEye(img_rdir, eye);
-		return std::string();
+		return eye.getCodeRdir();
 	}
 
 
