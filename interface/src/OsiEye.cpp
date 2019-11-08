@@ -392,10 +392,6 @@ imwrite(rFilename.c_str(),cvarrToMat(pImage));
 		return ret;
 	}
 
-	std::string OsiEye::myGetMask(osiris::OsiEye & rEye, osiris::OsiCircle eye_info)
-	{
-		return std::string();
-	}
 
 
 
