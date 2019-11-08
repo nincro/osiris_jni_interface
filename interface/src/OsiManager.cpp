@@ -827,11 +827,10 @@ namespace osiris
 
 	std::string OsiManager::getCode(std::string img_rdir)
 	{
-		cout << endl;
-		cout << "================" << endl;
-		cout << "std::string OsiManager::getCode("<< img_rdir << ")" << endl;
-		cout << "================" << endl;
-		cout << endl;
+		printf("================");
+		printf("std::string OsiManager::getCode(%s)", img_rdir);
+		printf("================");
+		
 
 		// If matching is requested, create a file
 		ofstream result_matching;
