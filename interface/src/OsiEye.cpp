@@ -339,14 +339,14 @@ imwrite(rFilename.c_str(),cvarrToMat(pImage));
 		//瞳孔中心坐标(不一定是同心圆)
 		int pupil_c_x=mPupil.getCenter().x-mIris.getCenter().x+w/2;
 		int pupil_c_y=mPupil.getCenter().y-mIris.getCenter().y+w/2;
-		printf("[*]瞳孔中心和半径(%d,%d,%d),Iris中心和半径(%d,%d,%d)\n",
+		/*printf("[*]瞳孔中心和半径(%d,%d,%d),Iris中心和半径(%d,%d,%d)\n",
             mPupil.getCenter().x,
             mPupil.getCenter().y,
             mPupil.getRadius(),
             mIris.getCenter().x,
             mIris.getCenter().y,
             mIris.getRadius()
-            );
+            );*/
 				 
         cvReleaseImage(&tmp) ;
     }
