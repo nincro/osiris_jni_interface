@@ -237,7 +237,7 @@ imwrite(rFilename.c_str(),cvarrToMat(pImage));
 
     void OsiEye::saveParameters (const string & rFilename )
     {
-		std::printf("OsiEye::saveParameters (%s)", rFilename);
+		
         // Open the file
         ofstream file(rFilename.c_str(),ios::out) ;
 

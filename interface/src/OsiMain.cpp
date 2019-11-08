@@ -94,7 +94,7 @@ std::string getCode(std::string img_rdir) {
 	OsiManager osi;
 	osi.loadConfiguration("data");
 	osi.showConfiguration();
-	//osi.getCode(img_rdir);
+	osi.getCode(img_rdir);
 }
 
 int main (int argc, char * argv[])
