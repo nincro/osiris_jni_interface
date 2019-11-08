@@ -627,7 +627,7 @@ namespace osiris
 				rEye.saveParameters(mOutputDirParameters + short_name + mSuffixParameters);
 			}
 		}
-
+		cout << "[o] saveParameters " << endl;
 		// Save mask
 		if (mOutputDirMasks != "")
 		{
