@@ -91,8 +91,8 @@ std::string getCode(std::string img_rdir) {
 	{
 		OsiManager osi;
 		osi.loadConfiguration("data");
-		//osi.showConfiguration();
-		//osi.getCode(img_rdir);
+		osi.showConfiguration();
+		osi.getCode(img_rdir);
 		return std::string();
 	}
 	catch (std::exception & e)
