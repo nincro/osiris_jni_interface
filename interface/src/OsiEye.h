@@ -148,7 +148,7 @@ namespace osiris
         */
         void segment ( int minIrisDiameter , int minPupilDiameter , int maxIrisDiameter , int maxPupilDiameter ) ;
 
-		std::string mySegment(int minIrisDiameter, int minPupilDiameter, int maxIrisDiameter, int maxPupilDiameter);
+
 
         /** Normalize image and mask.
         * If the mask is not already initialized, the function does intialize it to 255.
@@ -183,6 +183,7 @@ namespace osiris
         * @see OsiProcessings::match()
         */
         float match ( OsiEye & rEye , const CvMat * pApplicationPoints ) ;
+
     private :
 
         /** The original image corresponding to the eye (input only). */
@@ -208,7 +209,7 @@ namespace osiris
 
         /** The iris circle corresponding to the eye (input and/or output). */
         OsiCircle mIris ;
-        IplImage *mpMyIris;
+
 		/** The pupil coarse contour corresponding to the eye. */
 		std::vector<CvPoint> mCoarsePupilContour ;
 

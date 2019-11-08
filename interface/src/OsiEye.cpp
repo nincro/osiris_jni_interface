@@ -6,14 +6,6 @@
 * License : BSD
 ********************************************************/
 
-
-#include<opencv2/core/core.hpp>  
-#include<opencv2/imgproc/imgproc.hpp>  
-#include<opencv2/highgui/highgui.hpp>  
-#include "cv.hpp"
-#include "opencv2/opencv.hpp"
-using namespace cv;
-
 #include <fstream>
 #include <stdexcept>
 #include "cv.h"
@@ -47,8 +39,8 @@ namespace osiris
         cvReleaseImage(&mpMask) ;
         cvReleaseImage(&mpNormalizedImage) ;
         cvReleaseImage(&mpNormalizedMask) ;
-        cvReleaseImage(&mpIrisCode) ; 
-		}
+        cvReleaseImage(&mpIrisCode) ;
+    }
 
 
 
@@ -178,31 +170,28 @@ namespace osiris
     // Functions for saving images and parameters
     /////////////////////////////////////////////
 
+
+
     void OsiEye::saveImage ( const string & rFilename , const IplImage * pImage )
     {
-        return ;
-        printf("save image %s %x\n",rFilename.c_str(),pImage);
         // :TODO: no exception here, but 2 error messages
         // 1. pImage does NOT exist => "image was neither comptued nor loaded"
         // 2. cvSaveImage returns <=0 => "rFilename = invalid for saving"
         if ( ! pImage )
         {
             throw runtime_error("Cannot save image " + rFilename + " because this image is not built") ;
-        } 
-imwrite(rFilename.c_str(),cvarrToMat(pImage));
-/*
-        if (!cvSaveImage(rFilename.c_str(),pImage) )
+        }
+        if ( ! cvSaveImage(rFilename.c_str(),pImage) )
         {
             cout << "Cannot save image as " << rFilename << endl ;
         }
-*/
     }
 
 
 
     void OsiEye::saveSegmentedImage ( const string & rFilename )
-    {       
-        return ; 
+    {        
+        saveImage(rFilename,mpSegmentedImage) ;
     }
 
 
@@ -237,7 +226,6 @@ imwrite(rFilename.c_str(),cvarrToMat(pImage));
 
     void OsiEye::saveParameters (const string & rFilename )
     {
-		
         // Open the file
         ofstream file(rFilename.c_str(),ios::out) ;
 
@@ -306,9 +294,10 @@ imwrite(rFilename.c_str(),cvarrToMat(pImage));
         cvSet(mpMask,cvScalar(255)) ;
     }
 
-//void rotateBasedOnMask(lpl
+
+
     void OsiEye::segment ( int minIrisDiameter , int minPupilDiameter , int maxIrisDiameter , int maxPupilDiameter )
-    { 
+    {
         if ( ! mpOriginalImage )
         {
             throw runtime_error("Cannot segment image because original image is not loaded") ;
@@ -318,13 +307,13 @@ imwrite(rFilename.c_str(),cvarrToMat(pImage));
         mpMask = cvCreateImage(cvGetSize(mpOriginalImage),IPL_DEPTH_8U,1) ;
         mpSegmentedImage = cvCreateImage(cvGetSize(mpOriginalImage),IPL_DEPTH_8U,3) ;
         cvCvtColor(mpOriginalImage,mpSegmentedImage,CV_GRAY2BGR) ;
- 
+
         // Processing functions
         OsiProcessings op ;
- 
+
         // Segment the eye
         op.segment(mpOriginalImage,mpMask,mPupil,mIris,mThetaCoarsePupil,mThetaCoarseIris,mCoarsePupilContour,mCoarseIrisContour,minIrisDiameter,minPupilDiameter,maxIrisDiameter,maxPupilDiameter) ;
- 
+
         // Draw on segmented image
         IplImage * tmp = cvCloneImage(mpMask) ;
         cvZero(tmp) ;
@@ -332,67 +321,11 @@ imwrite(rFilename.c_str(),cvarrToMat(pImage));
         cvCircle(tmp,mPupil.getCenter(),mPupil.getRadius(),cvScalar(0),-1) ;
         cvSub(tmp,mpMask,tmp) ;
         cvSet(mpSegmentedImage,cvScalar(0,0,255),tmp) ;
+        cvReleaseImage(&tmp) ;
         cvCircle(mpSegmentedImage,mPupil.getCenter(),mPupil.getRadius(),cvScalar(0,255,0)) ;
         cvCircle(mpSegmentedImage,mIris.getCenter(),mIris.getRadius(),cvScalar(0,255,0)) ;
-        
-		int w=mIris.getRadius()*2; 
-		//瞳孔中心坐标(不一定是同心圆)
-		int pupil_c_x=mPupil.getCenter().x-mIris.getCenter().x+w/2;
-		int pupil_c_y=mPupil.getCenter().y-mIris.getCenter().y+w/2;
-		/*printf("[*]瞳孔中心和半径(%d,%d,%d),Iris中心和半径(%d,%d,%d)\n",
-            mPupil.getCenter().x,
-            mPupil.getCenter().y,
-            mPupil.getRadius(),
-            mIris.getCenter().x,
-            mIris.getCenter().y,
-            mIris.getRadius()
-            );*/
-				 
-        cvReleaseImage(&tmp) ;
+
     }
-
-	std::string OsiEye::mySegment(int minIrisDiameter, int minPupilDiameter, int maxIrisDiameter, int maxPupilDiameter)
-	{
-		if (!mpOriginalImage)
-		{
-			throw runtime_error("Cannot segment image because original image is not loaded");
-		}
-
-		// Initialize mask and segmented image
-		mpMask = cvCreateImage(cvGetSize(mpOriginalImage), IPL_DEPTH_8U, 1);
-		mpSegmentedImage = cvCreateImage(cvGetSize(mpOriginalImage), IPL_DEPTH_8U, 3);
-		cvCvtColor(mpOriginalImage, mpSegmentedImage, CV_GRAY2BGR);
-
-		// Processing functions
-		OsiProcessings op;
-
-		// Segment the eye
-		op.segment(mpOriginalImage, mpMask, mPupil, mIris, mThetaCoarsePupil, mThetaCoarseIris, mCoarsePupilContour, mCoarseIrisContour, minIrisDiameter, minPupilDiameter, maxIrisDiameter, maxPupilDiameter);
-
-		std::string ret;
-		
-		int w = mIris.getRadius() * 2;
-		//瞳孔中心坐标(不一定是同心圆)
-		int pupil_c_x = mPupil.getCenter().x - mIris.getCenter().x + w / 2;
-		int pupil_c_y = mPupil.getCenter().y - mIris.getCenter().y + w / 2;
-		printf("[*]瞳孔中心和半径 (%d,%d,%d) ,Iris中心和半径 (%d,%d,%d) \n",
-			mPupil.getCenter().x,
-			mPupil.getCenter().y,
-			mPupil.getRadius(),
-			mIris.getCenter().x,
-			mIris.getCenter().y,
-			mIris.getRadius()
-		);
-		ret += (mPupil.getCenter().x);	ret += ",";
-		ret += (mPupil.getCenter().y);	ret += ",";
-		ret += (mPupil.getRadius());	ret += ",";
-		ret += (mIris.getCenter().x);	ret += ",";
-		ret += (mIris.getCenter().y);	ret += ",";
-		ret += (mIris.getRadius());
-		
-		return ret;
-	}
-
 
 
 
@@ -451,7 +384,58 @@ imwrite(rFilename.c_str(),cvarrToMat(pImage));
 
 
     float OsiEye::match ( OsiEye & rEye , const CvMat * pApplicationPoints )
-    { return 0;
+    {
+        // Check that both iris codes are built
+        if ( ! mpIrisCode )
+        {
+            throw runtime_error("Cannot match because iris code 1 is not built (nor computed neither loaded)") ;
+        }
+        if ( ! rEye.mpIrisCode )
+        {
+            throw runtime_error("Cannot match because iris code 2 is not built (nor computed neither loaded)") ;
+        }
+
+        // Initialize the normalized masks
+        // :TODO: must inform the user of this step, for example if user provides masks for all images
+        // but one is missing for only one image. However, message must not be spammed if the user
+        // did not provide any mask ! So it must be found a way to inform user but without spamming
+        if ( ! mpNormalizedMask )
+        {
+            mpNormalizedMask = cvCreateImage(cvGetSize(pApplicationPoints),IPL_DEPTH_8U,1) ;
+            cvSet(mpNormalizedMask,cvScalar(255)) ;
+            //cout << "Normalized mask of image 1 is missing for matching. All pixels are initialized to 255" << endl ;
+        }
+        if ( ! rEye.mpNormalizedMask )
+        {
+            rEye.mpNormalizedMask = cvCreateImage(cvGetSize(pApplicationPoints),IPL_DEPTH_8U,1) ;
+            cvSet(rEye.mpNormalizedMask,cvScalar(255)) ;
+            //cout << "Normalized mask of image 2 is missing for matching. All pixels are initialized to 255" << endl ;
+        }
+
+        // Build the total mask = mask1 * mask2 * points    
+        IplImage * temp = cvCreateImage(cvGetSize(pApplicationPoints),mpIrisCode->depth,1) ;
+        cvSet(temp,cvScalar(0)) ;
+        cvAnd(mpNormalizedMask,rEye.mpNormalizedMask,temp,pApplicationPoints) ;
+
+        // Copy the mask f times, where f correspond to the number of codes (= number of filters)
+        int n_codes = mpIrisCode->height / pApplicationPoints->height ;
+        IplImage * total_mask = cvCreateImage(cvGetSize(mpIrisCode),IPL_DEPTH_8U,1) ;
+        for ( int n = 0 ; n < n_codes ; n++ )
+        {
+            cvSetImageROI(total_mask,cvRect(0,n*pApplicationPoints->height,pApplicationPoints->width,pApplicationPoints->height)) ;
+            cvCopy(temp,total_mask) ;        
+            cvResetImageROI(total_mask) ;
+        }
+
+        // Match
+        OsiProcessings op ;
+        float score = op.match(mpIrisCode,rEye.mpIrisCode,total_mask) ;
+
+        // Free memory
+        cvReleaseImage(&temp) ;
+        cvReleaseImage(&total_mask) ;
+    
+        return score ;
     }
 
 
