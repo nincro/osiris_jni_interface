@@ -833,7 +833,7 @@ namespace osiris
 		
 
 		// If matching is requested, create a file
-		ofstream result_matching;
+		/*ofstream result_matching;
 		if (mProcessMatching && mOutputFileMatchingScores != "")
 		{
 			try
@@ -845,7 +845,7 @@ namespace osiris
 				cout << e.what() << endl;
 				throw runtime_error("Cannot create the file for matching scores : " + mOutputFileMatchingScores);
 			}
-		}
+		}*/
 		OsiEye eye;
 		processOneEye(img_rdir, eye);
 		return std::string();

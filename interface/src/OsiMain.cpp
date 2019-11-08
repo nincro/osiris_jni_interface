@@ -104,7 +104,7 @@ int main (int argc, char * argv[])
 	osi.loadConfiguration("data");
 	osi.showConfiguration();
 	osi.getCode("0000_000.bmp");
-
+	osi.run();
     return 0 ;
 
 }
