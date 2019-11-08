@@ -2,7 +2,7 @@ public class Demo {
     
     static {
         String nativeExecuter = "/home/ninn/jnidemo/jni/Demo.so";
-        nativeExecuter = "/home/ninn/jnidemo/interface/lib/libOsiInterface.so";
+        nativeExecuter = "/home/ninn/jnidemo/osiris_jni_interface/interface/lib/libOsiInterface.so";
     	System.load(nativeExecuter);
     }
 
