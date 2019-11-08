@@ -298,6 +298,7 @@ namespace osiris
 
     void OsiEye::segment ( int minIrisDiameter , int minPupilDiameter , int maxIrisDiameter , int maxPupilDiameter )
     {
+		cout << "void OsiEye::segment" << endl;
         if ( ! mpOriginalImage )
         {
             throw runtime_error("Cannot segment image because original image is not loaded") ;

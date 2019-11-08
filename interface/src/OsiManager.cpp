@@ -827,9 +827,7 @@ namespace osiris
 
 	std::string OsiManager::getCode(std::string img_rdir)
 	{
-		printf("================");
-		printf("std::string OsiManager::getCode(%s)", img_rdir);
-		printf("================");
+		
 		
 
 		// If matching is requested, create a file

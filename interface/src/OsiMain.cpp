@@ -80,13 +80,9 @@
 using namespace osiris ;
 
 
-std::string getCode(std::string img_rdir);
 
-JNIEXPORT void JNICALL Java_Demo_sayHello
-  (JNIEnv *, jclass){
-	getCode("0000_000.bmp");
-	
-}
+
+
 
 /**
 */
@@ -97,9 +93,17 @@ std::string getCode(std::string img_rdir) {
 	osi.getCode(img_rdir);
 }
 
+JNIEXPORT void JNICALL Java_Demo_sayHello
+(JNIEnv *, jclass) {
+	getCode("0000_000.bmp");
+
+}
 int main (int argc, char * argv[])
 {
-	
+	OsiManager osi;
+	osi.loadConfiguration("data");
+	osi.showConfiguration();
+	osi.getCode("0000_000.bmp");
 
     return 0 ;
 
