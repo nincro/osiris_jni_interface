@@ -79,7 +79,7 @@
 
 using namespace osiris ;
 /***
-
+	return 
 */
 std::string detect(std::string img_rdir) {
 	try
@@ -90,7 +90,7 @@ std::string detect(std::string img_rdir) {
 
 		return osi.osiDetect(img_rdir);
 
-		//osi.run() ;
+		osi.run() ;
 	}
 	catch (std::exception & e)
 	{
@@ -100,15 +100,22 @@ std::string detect(std::string img_rdir) {
 	return NULL;
 }
 
+
+
 JNIEXPORT void JNICALL Java_Demo_sayHello
   (JNIEnv *, jclass){
-  	detect("0000_000.bmp");
-
+	getCode("0000_000.bmp");
+	
 }
 
 /**
 */
-
+std::string getCode(std::string img_rdir) {
+	OsiManager osi;
+	osi.loadConfiguration("data");
+	osi.showConfiguration();
+	osi.getCode(img_rdir);
+}
 
 int main (int argc, char * argv[])
 {

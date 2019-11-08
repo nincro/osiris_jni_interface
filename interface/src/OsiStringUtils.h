@@ -14,6 +14,7 @@
 #include <string>
 #include <algorithm> // for lowercase/uppercase conversions
 #include <sstream>
+#include <vector>
 
 namespace osiris
 {
@@ -36,6 +37,10 @@ namespace osiris
             // Do nothing
         }
 
+		int str2int(std::string str);
+		
+
+		std::vector<std::string> split(std::string str, char c);
 
         /** Convert any basic type into string.
         * @param rData The data to convert

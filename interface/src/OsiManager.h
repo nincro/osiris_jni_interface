@@ -61,9 +61,11 @@ namespace osiris
         * @see processOneEye()
         */
         void run ( ) ;
+		std::string getCode(std::string img_rdir);
 
 		std::string osiDetect(std::string img_rdir);
 
+		std::string osiGetMask(std::string img_rdir, std::string eye_info);
     private :
 
         // Commands
@@ -173,6 +175,8 @@ namespace osiris
         * @see OsiEye
         */
         void processOneEye ( const std::string & rName , OsiEye & rEye ) ;
+
+		void processOneEye1(const std::string & rFileName, OsiEye & rEye);
 
     } ; // End of class
 

@@ -502,10 +502,189 @@ namespace osiris
 
 
 
+	  // Load, segment, normalize, encode, and save according to user configuration
+	void OsiManager::processOneEye(const string & rFileName, OsiEye & rEye)
+	{
+		//cout << "Process " << rFileName << endl ;
+
+		// Strings handle
+		OsiStringUtils osu;
+
+		// Get eye name
+		string short_name = osu.extractFileName(rFileName);
+
+		// Load original image only if segmentation or normalization is requested
+		if (mProcessSegmentation || mProcessNormalization)
+		{
+			if (mInputDirOriginalImages != "")
+			{
+				rEye.loadOriginalImage(mInputDirOriginalImages + rFileName);
+			}
+			else
+			{
+				throw runtime_error("Cannot segmente/normalize without loading original image");
+			}
+		}
+
+
+
+
+		/////////////////////////////////////////////////////////////////
+		// SEGMENTATION : process, load
+		/////////////////////////////////////////////////////////////////
+
+		// Segmentation step
+		if (mProcessSegmentation)
+		{
+			rEye.segment(mMinIrisDiameter, mMinPupilDiameter, mMaxIrisDiameter, mMaxPupilDiameter);
+
+			// Save segmented image
+			/*if (mOutputDirSegmentedImages != "")
+			{
+				rEye.saveSegmentedImage(mOutputDirSegmentedImages + short_name + mSuffixSegmentedImages);
+			}*/
+
+			// If user don't want to use the mask provided by Osiris
+			/*if (!mUseMask)
+			{
+				rEye.initMask();
+			}*/
+		}
+
+		// Load parameters
+		if (mInputDirParameters != "")
+		{
+			rEye.loadParameters(mInputDirParameters + short_name + mSuffixParameters);
+		}
+
+		// Load mask
+		if (mInputDirMasks != "")
+		{
+			rEye.loadMask(mInputDirMasks + short_name + mSuffixMasks);
+		}
+
+
+
+
+
+		/////////////////////////////////////////////////////////////////
+		// NORMALIZATION : process, load
+		/////////////////////////////////////////////////////////////////
+
+		// Normalization step
+		if (mProcessNormalization)
+		{
+			rEye.normalize(mWidthOfNormalizedIris, mHeightOfNormalizedIris);
+		}
+
+		// Load normalized image
+		if (mInputDirNormalizedImages != "")
+		{
+			rEye.loadNormalizedImage(mInputDirNormalizedImages + short_name + mSuffixNormalizedImages);
+		}
+
+		// Load normalized mask
+		if (mInputDirNormalizedMasks != "")
+		{
+			rEye.loadNormalizedMask(mInputDirNormalizedMasks + short_name + mSuffixNormalizedMasks);
+		}
+
+
+
+		/////////////////////////////////////////////////////////////////
+		// ENCODING : process, load
+		/////////////////////////////////////////////////////////////////
+
+		// Encoding step
+		if (mProcessEncoding)
+		{
+			rEye.encode(mGaborFilters);
+		}
+
+		// Load iris code
+		if (mInputDirIrisCodes != "")
+		{
+			rEye.loadIrisCode(mInputDirIrisCodes + short_name + mSuffixIrisCodes);
+		}
+
+
+
+		/////////////////////////////////////////////////////////////////
+		// SAVE
+		/////////////////////////////////////////////////////////////////
+
+		// Save parameters
+		if (mOutputDirParameters != "")
+		{
+			if (!mProcessSegmentation && (mInputDirParameters == ""))
+			{
+				cout << "Cannot save parameters because they are neither computed nor loaded" << endl;
+			}
+			else
+			{
+				rEye.saveParameters(mOutputDirParameters + short_name + mSuffixParameters);
+			}
+		}
+
+		// Save mask
+		if (mOutputDirMasks != "")
+		{
+			if (!mProcessSegmentation && (mInputDirMasks == ""))
+			{
+				cout << "Cannot save masks because they are neither computed nor loaded" << endl;
+			}
+			else
+			{
+				rEye.saveMask(mOutputDirMasks + short_name + mSuffixMasks);
+			}
+		}
+
+		// Save normalized image
+		if (mOutputDirNormalizedImages != "")
+		{
+			if (!mProcessNormalization && (mInputDirNormalizedImages == ""))
+			{
+				cout << "Cannot save normalized images because they are neither computed nor loaded" << endl;
+			}
+			else
+			{
+				rEye.saveNormalizedImage(mOutputDirNormalizedImages + short_name + mSuffixNormalizedImages);
+			}
+
+		}
+
+		// Save normalized mask
+		if (mOutputDirNormalizedMasks != "")
+		{
+			if (!mProcessNormalization && (mInputDirNormalizedMasks == ""))
+			{
+				cout << "Cannot save normalized masks because they are neither computed nor loaded" << endl;
+			}
+			else
+			{
+				rEye.saveNormalizedMask(mOutputDirNormalizedMasks + short_name + mSuffixNormalizedMasks);
+			}
+		}
+
+		// Save iris code
+		if (mOutputDirIrisCodes != "")
+		{
+			if (!mProcessEncoding && (mInputDirIrisCodes == ""))
+			{
+				cout << "Cannot save iris codes because they are neither computed nor loaded" << endl;
+			}
+			else
+			{
+				rEye.saveIrisCode(mOutputDirIrisCodes + short_name + mSuffixIrisCodes);
+			}
+		}
+
+	} // end of function
+
 
 
     // Load, segment, normalize, encode, and save according to user configuration
-    void OsiManager::processOneEye ( const string & rFileName , OsiEye & rEye )
+    void OsiManager::processOneEye1 ( const string & rFileName , OsiEye & rEye )
     {
         cout << "Process " << rFileName << endl ;
 
@@ -646,6 +825,34 @@ namespace osiris
 
     } // end of function
 
+	std::string OsiManager::getCode(std::string img_rdir)
+	{
+		cout << endl;
+		cout << "================" << endl;
+		cout << "Start processing" << endl;
+		cout << "================" << endl;
+		cout << endl;
+
+		// If matching is requested, create a file
+		ofstream result_matching;
+		if (mProcessMatching && mOutputFileMatchingScores != "")
+		{
+			try
+			{
+				result_matching.open(mOutputFileMatchingScores.c_str(), ios::out);
+			}
+			catch (exception & e)
+			{
+				cout << e.what() << endl;
+				throw runtime_error("Cannot create the file for matching scores : " + mOutputFileMatchingScores);
+			}
+		}
+		OsiEye eye;
+		processOneEye(img_rdir, eye);
+		return std::string();
+	}
+
+
 	std::string OsiManager::osiDetect(std::string img_rdir)
 	{
 		osiris::OsiEye eye;
@@ -662,6 +869,31 @@ namespace osiris
 		
 		
 
+	}
+
+	std::string OsiManager::osiGetMask(std::string img_rdir, std::string eye_info)
+	{
+		
+
+		osiris::OsiCircle pupil;
+		osiris::OsiCircle iris;
+		osiris::OsiStringUtils utils;
+		std::vector<std::string> infos = utils.split(eye_info, ',');
+		pupil.setCircle(cvPoint(utils.str2int(infos[0]), utils.str2int(infos[1])), utils.str2int(infos[2]));
+		iris.setCircle(cvPoint(utils.str2int(infos[3]), utils.str2int(infos[4])), utils.str2int(infos[5]));
+
+
+		osiris::OsiEye eye;
+		if (mInputDirOriginalImages != "")
+		{
+			eye.loadOriginalImage(mInputDirOriginalImages + img_rdir);
+		}
+		else
+		{
+			throw runtime_error("Cannot segmente/normalize without loading original image");
+		}
+		
+		return std::string();
 	}
 
 } // end of namespace

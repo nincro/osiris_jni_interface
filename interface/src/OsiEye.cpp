@@ -334,18 +334,18 @@ imwrite(rFilename.c_str(),cvarrToMat(pImage));
         cvCircle(mpSegmentedImage,mPupil.getCenter(),mPupil.getRadius(),cvScalar(0,255,0)) ;
         cvCircle(mpSegmentedImage,mIris.getCenter(),mIris.getRadius(),cvScalar(0,255,0)) ;
         
-				int w=mIris.getRadius()*2; 
-				//瞳孔中心坐标(不一定是同心圆)
-				int pupil_c_x=mPupil.getCenter().x-mIris.getCenter().x+w/2;
-				int pupil_c_y=mPupil.getCenter().y-mIris.getCenter().y+w/2;
-				printf("[*]瞳孔中心和半径(%d,%d,%d),Iris中心和半径(%d,%d,%d)\n",
-                    mPupil.getCenter().x,
-                    mPupil.getCenter().y,
-                    mPupil.getRadius(),
-                    mIris.getCenter().x,
-                    mIris.getCenter().y,
-                    mIris.getRadius()
-                    );
+		int w=mIris.getRadius()*2; 
+		//瞳孔中心坐标(不一定是同心圆)
+		int pupil_c_x=mPupil.getCenter().x-mIris.getCenter().x+w/2;
+		int pupil_c_y=mPupil.getCenter().y-mIris.getCenter().y+w/2;
+		printf("[*]瞳孔中心和半径(%d,%d,%d),Iris中心和半径(%d,%d,%d)\n",
+            mPupil.getCenter().x,
+            mPupil.getCenter().y,
+            mPupil.getRadius(),
+            mIris.getCenter().x,
+            mIris.getCenter().y,
+            mIris.getRadius()
+            );
 				 
         cvReleaseImage(&tmp) ;
     }
@@ -382,14 +382,19 @@ imwrite(rFilename.c_str(),cvarrToMat(pImage));
 			mIris.getCenter().y,
 			mIris.getRadius()
 		);
-		ret += (mPupil.getCenter().x);
-		ret += (mPupil.getCenter().y);
-		ret += (mPupil.getRadius());
-		ret += (mIris.getCenter().x);
-		ret += (mIris.getCenter().y);
+		ret += (mPupil.getCenter().x);	ret += ",";
+		ret += (mPupil.getCenter().y);	ret += ",";
+		ret += (mPupil.getRadius());	ret += ",";
+		ret += (mIris.getCenter().x);	ret += ",";
+		ret += (mIris.getCenter().y);	ret += ",";
 		ret += (mIris.getRadius());
 		
 		return ret;
+	}
+
+	std::string OsiEye::myGetMask(osiris::OsiEye & rEye, osiris::OsiCircle eye_info)
+	{
+		return std::string();
 	}
 
 
