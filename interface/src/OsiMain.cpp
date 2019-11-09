@@ -103,6 +103,23 @@ std::string getCode(std::string img_rdir) {
 	return NULL;
 }
 
+std::string getCodeAndMask(std::string img_rdir) {
+	try
+	{
+		OsiManager osi;
+		osi.loadConfiguration("data");
+		osi.showConfiguration();
+		osi.getCode(img_rdir);
+		return std::string();
+	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+
+	return NULL;
+}
+
 JNIEXPORT void JNICALL Java_Demo_sayHello
 (JNIEnv *, jclass) {
 	getCode("0000_000.bmp");
