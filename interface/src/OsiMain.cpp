@@ -82,6 +82,7 @@ using namespace osiris ;
 
 JNIEXPORT jstring JNICALL Java_JniImpl_getCodeAndMask
 (JNIEnv * env, jclass cla, jstring jimg_rdir){
+	std::cout << "jni:getCodeAndMask" << endl;
 	const char* str = env->GetStringUTFChars(jimg_rdir, 0);
 	std::string img_rdir = str;
 
@@ -102,39 +103,39 @@ JNIEXPORT jstring JNICALL Java_JniImpl_getCodeAndMask
 
 /**
 */
-std::string getCode(std::string img_rdir) {
-	try
-	{
-		OsiManager osi;
-		osi.loadConfiguration("data");
-		osi.showConfiguration();
-		osi.getCode(img_rdir);
-		return std::string();
-	}
-	catch (std::exception & e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-
-	return NULL;
-}
-
-std::string getCodeAndMask(std::string img_rdir) {
-	try
-	{
-		OsiManager osi;
-		osi.loadConfiguration("data");
-		osi.showConfiguration();
-		osi.getCode(img_rdir);
-		return std::string();
-	}
-	catch (std::exception & e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-
-	return NULL;
-}
+//std::string getCode(std::string img_rdir) {
+//	try
+//	{
+//		OsiManager osi;
+//		osi.loadConfiguration("data");
+//		osi.showConfiguration();
+//		osi.getCode(img_rdir);
+//		return std::string();
+//	}
+//	catch (std::exception & e)
+//	{
+//		std::cout << e.what() << std::endl;
+//	}
+//
+//	return NULL;
+//}
+//
+//std::string getCodeAndMask(std::string img_rdir) {
+//	try
+//	{
+//		OsiManager osi;
+//		osi.loadConfiguration("data");
+//		osi.showConfiguration();
+//		osi.getCode(img_rdir);
+//		return std::string();
+//	}
+//	catch (std::exception & e)
+//	{
+//		std::cout << e.what() << std::endl;
+//	}
+//
+//	return NULL;
+//}
 
 JNIEXPORT void JNICALL Java_Demo_sayHello
 (JNIEnv *, jclass) {
