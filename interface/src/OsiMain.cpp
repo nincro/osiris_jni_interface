@@ -80,7 +80,23 @@
 using namespace osiris ;
 
 
+JNIEXPORT jstring JNICALL Java_JniImpl_getCodeAndMask
+(JNIEnv * env, jclass cla, jstring jimg_rdir){
+	const char* str = env->GetStringUTFChars(jimg_rdir, 0);
+	std::string img_rdir = str;
 
+	OsiManager osi;
+	osi.loadConfiguration("data");
+	osi.showConfiguration();
+	std::string strCodeAndMask = osi.getCode(img_rdir);
+
+	env->ReleaseStringUTFChars(jimg_rdir, 0);
+	return env->NewStringUTF(strCodeAndMask.c_str());
+
+	
+
+
+}
 
 
 
