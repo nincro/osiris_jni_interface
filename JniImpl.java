@@ -15,7 +15,7 @@ public class JniImpl {
     public static void main(String[] args) {
         //System.loadLibrary("Hello");
         System.out.println("welcome");
-        sayHello();
+       getCodeAndMask("0000_000.bmp");
     }
 
     private static native void sayHello();
