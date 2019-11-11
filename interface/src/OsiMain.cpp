@@ -73,7 +73,7 @@
 
 #include "OsiManager.h"
 #include "jni.h"
-#include "Demo.h"
+#include "JniImpl.h"
 
 
 
