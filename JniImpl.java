@@ -6,7 +6,7 @@ public class JniImpl {
     	System.load(nativeExecuter);
     }
 
-    private static native void getCodeAndMask();
+    
 
     private static native String matching(String code_rdir, String mask_rdir);
 
