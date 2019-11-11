@@ -9,14 +9,6 @@ extern "C" {
 #endif
 /*
  * Class:     JniImpl
- * Method:    getCodeAndMask
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_JniImpl_getCodeAndMask__
-  (JNIEnv *, jclass);
-
-/*
- * Class:     JniImpl
  * Method:    matching
  * Signature: (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
  */
@@ -28,7 +20,7 @@ JNIEXPORT jstring JNICALL Java_JniImpl_matching
  * Method:    getCodeAndMask
  * Signature: (Ljava/lang/String;)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_JniImpl_getCodeAndMask__Ljava_lang_String_2
+JNIEXPORT jstring JNICALL Java_JniImpl_getCodeAndMask
   (JNIEnv *, jclass, jstring);
 
 /*
