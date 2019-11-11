@@ -136,12 +136,12 @@ JNIEXPORT jstring JNICALL Java_JniImpl_getCodeAndMask
 //
 //	return NULL;
 //}
-
-JNIEXPORT void JNICALL Java_Demo_sayHello
-(JNIEnv *, jclass) {
-	getCode("0000_000.bmp");
-
-}
+//
+//JNIEXPORT void JNICALL Java_Demo_sayHello
+//(JNIEnv *, jclass) {
+//	getCode("0000_000.bmp");
+//
+//}
 int main (int argc, char * argv[])
 {
 	
