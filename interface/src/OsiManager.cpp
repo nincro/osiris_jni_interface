@@ -850,7 +850,9 @@ namespace osiris
 		}*/
 		OsiEye eye;
 		processOneEye(img_rdir, eye);
-		return eye.getCodeRdir();
+		cout << "code rdir: " << eye.getCodeRdir();
+		cout << "nomalized mask rdir: " << eye.getNormalizedMaskRdir();
+		return eye.getCodeRdir()+","+eye.getNormalizedMaskRdir();
 	}
 
 
