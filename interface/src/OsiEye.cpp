@@ -449,6 +449,11 @@ namespace osiris
 		code_rdir = rdir;
 	}
 
+	void OsiEye::setFileName(std::string filename)
+	{
+		this->filename = filename;
+	}
+
 	std::string OsiEye::getNormalizedMaskRdir()
 	{
 		return normalized_mask_rdir;
@@ -457,6 +462,11 @@ namespace osiris
 	std::string OsiEye::getCodeRdir()
 	{
 		return code_rdir;
+	}
+
+	std::string OsiEye::getFileName()
+	{
+		return filename;
 	}
 
 

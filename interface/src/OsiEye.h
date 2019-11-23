@@ -187,14 +187,19 @@ namespace osiris
 
 		void setNormalizedMaskRdir(std::string rdir);
 		void setCodeRdir(std::string rdir);
+		void setFileName(std::string filename);
+
 
 		std::string getNormalizedMaskRdir();
 		std::string getCodeRdir();
+		std::string getFileName();
+
 
     private :
 
 		std::string normalized_mask_rdir;
 		std::string code_rdir;
+		std::string filename;
 
         /** The original image corresponding to the eye (input only). */
         IplImage * mpOriginalImage ;

@@ -508,14 +508,14 @@ namespace osiris
 	  // Load, segment, normalize, encode, and save according to user configuration
 	void OsiManager::processOneEye(const string & rFileName, OsiEye & rEye)
 	{
-		//cout << "Process " << rFileName << endl ;
+		cout << "Process " << rFileName << endl ;
 
 		// Strings handle
 		OsiStringUtils osu;
 
 		// Get eye name
 		string short_name = osu.extractFileName(rFileName);
-
+		rEye.setFileName(short_name);
 		// Load original image only if segmentation or normalization is requested
 		if (mProcessSegmentation || mProcessNormalization)
 		{
@@ -850,9 +850,10 @@ namespace osiris
 		}*/
 		OsiEye eye;
 		processOneEye(img_rdir, eye);
-		cout << "code rdir: " << eye.getCodeRdir();
-		cout << "nomalized mask rdir: " << eye.getNormalizedMaskRdir();
-		return eye.getCodeRdir()+","+eye.getNormalizedMaskRdir();
+		//cout << "code rdir: " << eye.getCodeRdir();
+		//cout << "nomalized mask rdir: " << eye.getNormalizedMaskRdir();
+		cout << eye.getFileName();
+		return eye.getFileName();
 	}
 
 
