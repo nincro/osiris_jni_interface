@@ -85,17 +85,19 @@ JNIEXPORT jstring JNICALL Java_JniImpl_getCodeAndMask
 	std::cout << "jni:getCodeAndMask" << std::endl;
 	const char* str = env->GetStringUTFChars(jimg_rdir, 0);
 	std::string img_rdir = str;
-
-	OsiManager osi;
-	osi.loadConfiguration("data");
-	osi.showConfiguration();
-	std::string strCodeAndMask = osi.getCode(img_rdir);
-
-	env->ReleaseStringUTFChars(jimg_rdir, 0);
-	return env->NewStringUTF(strCodeAndMask.c_str());
-
+	try {
+		OsiManager osi;
+		osi.loadConfiguration("data");
+		osi.showConfiguration();
+		std::string strCodeAndMask = osi.getCode(img_rdir);
+		env->ReleaseStringUTFChars(jimg_rdir, 0);
+		return env->NewStringUTF(strCodeAndMask.c_str());
+	}
 	
-
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 
 }
 
