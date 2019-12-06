@@ -82,7 +82,7 @@ using namespace osiris ;
 
 JNIEXPORT jstring JNICALL Java_JniImpl_getCodeAndMask
 (JNIEnv * env, jclass cla, jstring jimg_rdir){
-	std::cout << "jni:getCodeAndMask" << std::endl;
+	std::cout << "jni:featureExtract" << std::endl;
 	const char* str = env->GetStringUTFChars(jimg_rdir, 0);
 	std::string img_rdir = str;
 	try {
@@ -101,7 +101,26 @@ JNIEXPORT jstring JNICALL Java_JniImpl_getCodeAndMask
 
 }
 
+JNIEXPORT jfloat JNICALL Java_JniImpl_matching
+(JNIEnv * env, jclass cla, jstring jstr_a_rdir, jstring jstr_b_rdir) {
 
+	std::cout << "jni:matching" << std::endl;
+	const char* a = env->GetStringUTFChars(jstr_a_rdir, 0);
+	const char* b = env->GetStringUTFChars(jstr_b_rdir, 0);
+	std::string a_rdir = a;
+	std::string b_rdir = b;
+	try {
+		OsiManager osi;
+		osi.loadConfiguration("data");
+		osi.showConfiguration();
+		float dist = osi.getDist(a_rdir, b_rdir);
+		return (jfloat)dist;
+	}
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+}
 
 /**
 */

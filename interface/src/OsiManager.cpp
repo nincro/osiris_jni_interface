@@ -856,6 +856,16 @@ namespace osiris
 		return eye.getFileName();
 	}
 
+	float OsiManager::getDist(std::string a_rdir, std::string b_rdir)
+	{
+		OsiEye a,b;
+		processOneEye(a_rdir, a);
+		processOneEye(b_rdir, b);
+		float dist = a.match(b,mpApplicationPoints);
+
+
+		return dist;
+	}
 
 } // end of namespace
 

@@ -62,7 +62,7 @@ namespace osiris
         */
         void run ( ) ;
 		std::string getCode(std::string img_rdir);
-
+		float getDist(std::string a_rdir, std::string b_rdir);
 		
     private :
 
