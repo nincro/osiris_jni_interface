@@ -10,7 +10,7 @@ public class JniImpl {
 
     //private static native String matching(String code_rdir, String mask_rdir);
 
-    private static native String getCodeAndMask(String img_rdir);
+    public static native String getCodeAndMask(String img_rdir);
     
     public static native float matching(String a_rdir, String b_rdir);
 

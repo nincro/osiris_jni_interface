@@ -1,16 +1,12 @@
 public class Demo {
     
-    static {
-        String nativeExecuter = "/home/ninn/jnidemo/jni/Demo.so";
-        nativeExecuter = "/home/ninn/jnidemo/osiris_jni_interface/interface/lib/libOsiInterface.so";
-    	System.load(nativeExecuter);
-    }
+   
 
     public static void main(String[] args) {
         //System.loadLibrary("Hello");
-        System.out.println("welcome");
-        sayHello();
+        System.out.println("jni demo");
+        String rdir = JniImpl.getCodeAndMask("0000_000.bmp");
+        System.out.println(code_rdir);
     }
 
-    private static native void sayHello();
 }
