@@ -148,13 +148,6 @@ namespace osiris
     }
 
 
-
-
-
-
-
-
-
     // Load the configuration from a textfile (ini)
     void OsiManager::loadConfiguration ( const string & sConfigPath)
     {
@@ -252,6 +245,198 @@ namespace osiris
         }
     }
 
+	void OsiManager::loadMatchingConfiguration(const string & sConfigPath)
+	{
+		string sPath = sConfigPath;
+		if (sPath.length() <= 0) {
+			throw runtime_error("sConfigPath Error: " + sPath);
+		}
+		if (sPath[sPath.length() - 1] != '/' ||
+			sPath[sPath.length() - 1] != '\\'
+			) {
+			sPath += "/";
+		}
+
+		// Open the file
+		ifstream file((sPath + "process-matching.ini").c_str(), ifstream::in);
+
+		if (!file.good())
+			throw runtime_error("Cannot read configuration file " + sPath + "process.ini");
+
+		// Some string functions
+		OsiStringUtils osu;
+
+		// Loop on lines
+		while (file.good() && !file.eof())
+		{
+			// Get the new line
+			string line;
+			getline(file, line);
+
+			// Filter out comments
+			if (!line.empty())
+			{
+				int pos = line.find('#');
+				if (pos != string::npos)
+					line = line.substr(0, pos);
+			}
+
+			// Split line into key and value
+			if (!line.empty())
+			{
+				int pos = line.find("=");
+
+				if (pos != string::npos)
+				{
+					// Trim key and value
+					string key = osu.trim(line.substr(0, pos));
+					string value = osu.trim(line.substr(pos + 1));
+
+					if (!key.empty() && !value.empty())
+					{
+						// Option is type bool
+						if (mMapBool.find(key) != mMapBool.end())
+							*mMapBool[key] = osu.fromString<bool>(value);
+
+						// Option is type int
+						else if (mMapInt.find(key) != mMapInt.end())
+							*mMapInt[key] = osu.fromString<int>(value);
+
+						// Option is type string
+						else if (mMapString.find(key) != mMapString.end()) {
+							if (key.substr(0, 4).compare("Load") == 0 |
+								key.substr(0, 4).compare("Save") == 0) {
+								*mMapString[key] = sPath + osu.convertSlashes(value);
+							}
+							else {
+								*mMapString[key] = osu.convertSlashes(value);
+							}
+						}
+
+						// Option is not stored in any mMap
+						else
+							cout << "Unknown option in configuration file : " << line << endl;
+					}
+				}
+			}
+		}
+
+		if (file)
+			file.close();
+
+
+		// Load the list containing all images
+		//loadListOfImages() ;
+
+		// Load the datas for Gabor filters
+		if (mProcessEncoding && mFilenameGaborFilters != "")
+		{
+			loadGaborFilters();
+		}
+
+		// Load the application points
+		if (mProcessMatching && mFilenameApplicationPoints != "")
+		{
+			loadApplicationPoints();
+		}
+	}
+
+	// Load the configuration of feature extraction task from a textfile (ini)
+	void OsiManager::loadFeatureExtractConfiguration(const string & sConfigPath)
+	{
+		string sPath = sConfigPath;
+		if (sPath.length() <= 0) {
+			throw runtime_error("sConfigPath Error: " + sPath);
+		}
+		if (sPath[sPath.length() - 1] != '/' ||
+			sPath[sPath.length() - 1] != '\\'
+			) {
+			sPath += "/";
+		}
+
+		// Open the file
+		ifstream file((sPath + "process-feature-extract.ini").c_str(), ifstream::in);
+
+		if (!file.good())
+			throw runtime_error("Cannot read configuration file " + sPath + "process.ini");
+
+		// Some string functions
+		OsiStringUtils osu;
+
+		// Loop on lines
+		while (file.good() && !file.eof())
+		{
+			// Get the new line
+			string line;
+			getline(file, line);
+
+			// Filter out comments
+			if (!line.empty())
+			{
+				int pos = line.find('#');
+				if (pos != string::npos)
+					line = line.substr(0, pos);
+			}
+
+			// Split line into key and value
+			if (!line.empty())
+			{
+				int pos = line.find("=");
+
+				if (pos != string::npos)
+				{
+					// Trim key and value
+					string key = osu.trim(line.substr(0, pos));
+					string value = osu.trim(line.substr(pos + 1));
+
+					if (!key.empty() && !value.empty())
+					{
+						// Option is type bool
+						if (mMapBool.find(key) != mMapBool.end())
+							*mMapBool[key] = osu.fromString<bool>(value);
+
+						// Option is type int
+						else if (mMapInt.find(key) != mMapInt.end())
+							*mMapInt[key] = osu.fromString<int>(value);
+
+						// Option is type string
+						else if (mMapString.find(key) != mMapString.end()) {
+							if (key.substr(0, 4).compare("Load") == 0 |
+								key.substr(0, 4).compare("Save") == 0) {
+								*mMapString[key] = sPath + osu.convertSlashes(value);
+							}
+							else {
+								*mMapString[key] = osu.convertSlashes(value);
+							}
+						}
+
+						// Option is not stored in any mMap
+						else
+							cout << "Unknown option in configuration file : " << line << endl;
+					}
+				}
+			}
+		}
+
+		if (file)
+			file.close();
+
+
+		// Load the list containing all images
+		//loadListOfImages() ;
+
+		// Load the datas for Gabor filters
+		if (mProcessEncoding && mFilenameGaborFilters != "")
+		{
+			loadGaborFilters();
+		}
+
+		// Load the application points
+		if (mProcessMatching && mFilenameApplicationPoints != "")
+		{
+			loadApplicationPoints();
+		}
+	}
 
 
     // Show the configuration of Osiris in prompt command

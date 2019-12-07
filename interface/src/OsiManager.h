@@ -50,6 +50,12 @@ namespace osiris
         */
         void loadConfiguration ( const std::string & sConfigPath = "../data/" ) ;
 
+		void loadMatchingConfiguration(const string & sConfigPath);
+
+
+		void loadFeatureExtractConfiguration(const string & sConfigPath);
+
+
         /** Show configuration in prompt command.
         * @see initConfiguration()
         * @see loadConfiguration()

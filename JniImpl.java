@@ -1,9 +1,16 @@
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class JniImpl {
     
     static {
-        String nativeExecuter = "/home/ninn/jnidemo/jni/Demo.so";
-        nativeExecuter = "/home/ninn/jnidemo/osiris_jni_interface/interface/lib/libOsiInterface.so";
-    	System.load(nativeExecuter);
+
+        String nativeSharedLib = "/home/ninn/jnidemo/osiris_jni_interface/interface/lib/libOsiInterface.so";
+        String rdir = "lib/libOsiInterface.so";
+        nativeSharedLib = Paths.get("interface").toAbsolutePath().resolve(rdir).toString();
+        System.out.println("nativeSharedLib:"+nativeSharedLib);
+        System.load(nativeSharedLib);
     }
 
     
