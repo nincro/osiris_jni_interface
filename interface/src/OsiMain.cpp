@@ -87,7 +87,7 @@ JNIEXPORT jstring JNICALL Java_JniImpl_getCodeAndMask
 	std::string img_rdir = str;
 	try {
 		OsiManager osi;
-		osi.loadConfiguration("data");
+		osi.loadFeatureExtractConfiguration("data");
 		osi.showConfiguration();
 		std::string strCodeAndMask = osi.getCode(img_rdir);
 		env->ReleaseStringUTFChars(jimg_rdir, 0);
@@ -111,7 +111,7 @@ JNIEXPORT jfloat JNICALL Java_JniImpl_matching
 	std::string b_rdir = b;
 	try {
 		OsiManager osi;
-		osi.loadConfiguration("data");
+		osi.loadMatchingConfiguration("data");
 		osi.showConfiguration();
 		float dist = osi.getDist(a_rdir, b_rdir);
 		return (jfloat)dist;
