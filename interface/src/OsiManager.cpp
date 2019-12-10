@@ -149,7 +149,7 @@ namespace osiris
 
 
     // Load the configuration from a textfile (ini)
-    void OsiManager::loadConfiguration ( const string & sConfigPath)
+    void OsiManager::loadConfiguration ( const std::string & sConfigPath)
     {
 		string sPath = sConfigPath;
 		if (sPath.length() <= 0) {
@@ -245,7 +245,7 @@ namespace osiris
         }
     }
 
-	void OsiManager::loadMatchingConfiguration(const string & sConfigPath)
+	void OsiManager::loadMatchingConfiguration(const std::string & sConfigPath)
 	{
 		string sPath = sConfigPath;
 		if (sPath.length() <= 0) {
@@ -342,7 +342,7 @@ namespace osiris
 	}
 
 	// Load the configuration of feature extraction task from a textfile (ini)
-	void OsiManager::loadFeatureExtractConfiguration(const string & sConfigPath)
+	void OsiManager::loadFeatureExtractConfiguration(const std::string & sConfigPath)
 	{
 		string sPath = sConfigPath;
 		if (sPath.length() <= 0) {
