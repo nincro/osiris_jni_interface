@@ -458,6 +458,11 @@ namespace osiris
 
 		cout << "[.] and mask" << endl;
 		cvAnd(mpNormalizedMask, mpNormalizedMask, temp, pApplicationPoints);
+		for (int y = 0; y < temp->height; y++) {
+			unsigned char* p = (unsigned char*)(temp->imageData + y * temp->widthStep);
+			for (int x = 0; x < temp->width*temp->nChannels; x++)
+				std::cout << (int)p[x] << ',';
+		}
 		int n_codes = mpIrisCode->height / pApplicationPoints->height;
 		IplImage * total_mask = cvCreateImage(cvGetSize(mpIrisCode), IPL_DEPTH_8U, 1);
 		for (int n = 0; n < n_codes; n++)
@@ -478,7 +483,6 @@ namespace osiris
 			unsigned char* p = (unsigned char*)(mpIrisCode->imageData + y * mpIrisCode->widthStep);
 			for (int x = 0; x < mpIrisCode->width*mpIrisCode->nChannels; x++)
 				stream << (int)p[x] << ',';
-			stream << std::endl;
 		}
 
 		stream >> ret;
