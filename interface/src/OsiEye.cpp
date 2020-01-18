@@ -478,7 +478,7 @@ namespace osiris
 			unsigned char* p = (unsigned char*)(mpIrisCode->imageData + y * mpIrisCode->widthStep);
 			for (int x = 0; x < mpIrisCode->width*mpIrisCode->nChannels; x++)
 				stream << (int)p[x] << ',';
-			stream << '\n';
+			stream << std::endl;
 		}
 
 		stream >> ret;
