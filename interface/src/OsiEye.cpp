@@ -452,6 +452,7 @@ namespace osiris
 			cvSet(mpNormalizedMask, cvScalar(255));
 			//cout << "Normalized mask of image 1 is missing for matching. All pixels are initialized to 255" << endl ;
 		}
+		cout << "getFeature" << endl;
 		IplImage * temp = cvCreateImage(cvGetSize(pApplicationPoints), mpIrisCode->depth, 1);
 		cvSet(temp, cvScalar(0));
 		cvAnd(mpNormalizedMask, pApplicationPoints, temp);
@@ -472,6 +473,8 @@ namespace osiris
 				stream << (int)p[x] << ',';
 			stream << '\n';
 		}
+		// Free memory
+		cvReleaseImage(&temp);
 		stream >> ret;
 
 		return ret;
