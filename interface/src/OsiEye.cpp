@@ -466,13 +466,17 @@ namespace osiris
 			cvCopy(temp, total_mask);
 			cvResetImageROI(total_mask);
 		}
+		cvAnd(total_mask, mpIrisCode, mpIrisCode, pApplicationPoints);
+		cout << "[o] and mask" << endl;
+
+
+		cout << "[.] copyFeature" << endl;
+
 		std::stringstream stream;
 		std::string ret;
-		cout << "[o] and mask" << endl;
-		cout << "[.] copyFeature" << endl;
-		for (int y = 0; y < total_mask->height; y++) {
-			unsigned char* p = (unsigned char*)(total_mask->imageData + y * total_mask->widthStep);
-			for (int x = 0; x < total_mask->width*total_mask->nChannels; x++)
+		for (int y = 0; y < mpIrisCode->height; y++) {
+			unsigned char* p = (unsigned char*)(mpIrisCode->imageData + y * mpIrisCode->widthStep);
+			for (int x = 0; x < mpIrisCode->width*mpIrisCode->nChannels; x++)
 				stream << (int)p[x] << ',';
 			stream << '\n';
 		}
