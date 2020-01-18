@@ -462,6 +462,7 @@ namespace osiris
 			unsigned char* p = (unsigned char*)(temp->imageData + y * temp->widthStep);
 			for (int x = 0; x < temp->width*temp->nChannels; x++)
 				//std::cout << (int)p[x] << ',';
+				;
 		}
 		int n_codes = mpIrisCode->height / pApplicationPoints->height;
 		IplImage * total_mask = cvCreateImage(cvGetSize(mpIrisCode), IPL_DEPTH_8U, 1);
