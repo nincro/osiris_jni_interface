@@ -464,18 +464,21 @@ namespace osiris
 			cvCopy(temp, total_mask);
 			cvResetImageROI(total_mask);
 		}
-		temp->imageSize;
 		std::stringstream stream;
 		std::string ret;
-		for (int y = 0; y < temp->height; y++) {
-			unsigned char* p = (unsigned char*)(temp->imageData + y * temp->widthStep);
-			for (int x = 0; x < temp->width*temp->nChannels; x++)
+		for (int y = 0; y < total_mask->height; y++) {
+			unsigned char* p = (unsigned char*)(total_mask->imageData + y * total_mask->widthStep);
+			for (int x = 0; x < total_mask->width*total_mask->nChannels; x++)
 				stream << (int)p[x] << ',';
 			stream << '\n';
 		}
+
+		stream >> ret;
+
 		// Free memory
 		cvReleaseImage(&temp);
-		stream >> ret;
+		cvReleaseImage(&total_mask);
+		
 
 		return ret;
 	}
