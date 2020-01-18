@@ -101,6 +101,27 @@ JNIEXPORT jstring JNICALL Java_JniImpl_getCodeAndMask
 
 }
 
+JNIEXPORT jstring JNICALL Java_JniImpl_getIrisFeature
+(JNIEnv * env, jclass cla, jstring jimg_basename){
+	std::cout << "jni:getIrisFeature" << std::endl;
+	const char* str = env->GetStringUTFChars(jimg_basename, 0);
+	std::string img_basename = str;
+	try {
+		OsiManager osi;
+		osi.loadFeatureExtractConfiguration("data");
+		osi.showConfiguration();
+		std::string strCodeAndMask = osi.getFeature(img_basename);
+		env->ReleaseStringUTFChars(jimg_basename, 0);
+		return env->NewStringUTF(strCodeAndMask.c_str());
+	}
+	
+	catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+}
+
+
 JNIEXPORT jfloat JNICALL Java_JniImpl_matching
 (JNIEnv * env, jclass cla, jstring jstr_a_rdir, jstring jstr_b_rdir) {
 

@@ -8,6 +8,7 @@
 
 #include <fstream>
 #include <stdexcept>
+#include <sstream>
 #include "cv.h"
 #include "OsiEye.h"
 #include "OsiProcessings.h"
@@ -438,6 +439,43 @@ namespace osiris
     
         return score ;
     }
+
+	std::string OsiEye::getFeature(const CvMat * pApplicationPoints)
+	{
+		if (!mpIrisCode)
+		{
+			throw runtime_error("Cannot match because iris code 1 is not built (nor computed neither loaded)");
+		}
+		if (!mpNormalizedMask)
+		{
+			mpNormalizedMask = cvCreateImage(cvGetSize(pApplicationPoints), IPL_DEPTH_8U, 1);
+			cvSet(mpNormalizedMask, cvScalar(255));
+			//cout << "Normalized mask of image 1 is missing for matching. All pixels are initialized to 255" << endl ;
+		}
+		IplImage * temp = cvCreateImage(cvGetSize(pApplicationPoints), mpIrisCode->depth, 1);
+		cvSet(temp, cvScalar(0));
+		cvAnd(mpNormalizedMask, pApplicationPoints, temp);
+		int n_codes = mpIrisCode->height / pApplicationPoints->height;
+		IplImage * total_mask = cvCreateImage(cvGetSize(mpIrisCode), IPL_DEPTH_8U, 1);
+		for (int n = 0; n < n_codes; n++)
+		{
+			cvSetImageROI(total_mask, cvRect(0, n*pApplicationPoints->height, pApplicationPoints->width, pApplicationPoints->height));
+			cvCopy(temp, total_mask);
+			cvResetImageROI(total_mask);
+		}
+		temp->imageSize;
+		std::stringstream stream;
+		std::string ret;
+		for (int y = 0; y < temp->height; y++) {
+			unsigned char* p = (unsigned char*)(temp->imageData + y * temp->widthStep);
+			for (int x = 0; x < temp->width*temp->nChannels; x++)
+				stream << (int)p[x] << ',';
+			stream << '\n';
+		}
+		stream >> ret;
+
+		return ret;
+	}
 
 	void OsiEye::setNormalizedMaskRdir(std::string rdir)
 	{

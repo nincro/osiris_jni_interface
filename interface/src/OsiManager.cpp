@@ -1048,9 +1048,16 @@ namespace osiris
 		processOneEye(b_rdir, b);
 		float dist = a.match(b,mpApplicationPoints);
 
-
+        
 		return dist;
 	}
+
+    std::string OsiManager::getFeature(std::string img_basename){
+		OsiEye eye;
+		processOneEye(img_basename, eye);
+		return eye.getFeature(mpApplicationPoints);
+    }
+
 
 } // end of namespace
 

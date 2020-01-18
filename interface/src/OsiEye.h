@@ -184,6 +184,7 @@ namespace osiris
         */
         float match ( OsiEye & rEye , const CvMat * pApplicationPoints ) ;
 
+		std::string getFeature(const CvMat* pApplicationPoints);
 
 		void setNormalizedMaskRdir(std::string rdir);
 		void setCodeRdir(std::string rdir);

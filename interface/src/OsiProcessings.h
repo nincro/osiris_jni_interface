@@ -146,6 +146,7 @@ namespace osiris
         */
         float match ( const IplImage * image1 , const IplImage * image2 , const IplImage * mask ) ;
 
+        std::string getFeature(const IplImage* image, const IplImage* mask);
 
 
 	private:
