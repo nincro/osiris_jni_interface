@@ -796,7 +796,7 @@ namespace osiris
 			rEye.loadIrisCode(mInputDirIrisCodes + short_name + mSuffixIrisCodes);
 		}
 
-		cout << "[o] before save" << endl;
+		cout << "[.] save" << endl;
 
 		/////////////////////////////////////////////////////////////////
 		// SAVE
@@ -867,6 +867,8 @@ namespace osiris
 				rEye.saveIrisCode(mOutputDirIrisCodes + short_name + mSuffixIrisCodes);
 			}
 		}
+
+		cout << "[o] save" << endl;
 
 	} // end of function
 
