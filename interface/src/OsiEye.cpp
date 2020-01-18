@@ -466,7 +466,7 @@ namespace osiris
 			cvCopy(temp, total_mask);
 			cvResetImageROI(total_mask);
 		}
-		cvAnd(total_mask, mpIrisCode, mpIrisCode, pApplicationPoints);
+		cvAnd(total_mask, mpIrisCode, mpIrisCode);
 		cout << "[o] and mask" << endl;
 
 
