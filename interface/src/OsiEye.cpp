@@ -457,7 +457,7 @@ namespace osiris
 		cvSet(temp, cvScalar(0));
 
 		cout << "[.] and mask" << endl;
-		cvAnd(mpNormalizedMask, pApplicationPoints, temp);
+		cvAnd(mpNormalizedMask, mpNormalizedMask, temp, pApplicationPoints);
 		int n_codes = mpIrisCode->height / pApplicationPoints->height;
 		IplImage * total_mask = cvCreateImage(cvGetSize(mpIrisCode), IPL_DEPTH_8U, 1);
 		for (int n = 0; n < n_codes; n++)
