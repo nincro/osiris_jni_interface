@@ -1057,7 +1057,9 @@ namespace osiris
     std::string OsiManager::getFeature(std::string img_basename){
 		OsiEye eye;
 		processOneEye(img_basename, eye);
-		return eye.getFeature(mpApplicationPoints);
+		std::string ret = eye.getFeature(mpApplicationPoints);
+
+		return ret;
     }
 
 
