@@ -23,11 +23,23 @@ public class JniImpl {
 
     public static native float matching(String a_rdir, String b_rdir);
 
+    static void demoMatching(){
+        String a_rdir = "0000_000.bmp";
+        String b_rdir = "0000_001.bmp";
+        System.out.println(matching(a_rdir, b_rdir));
+    }
+    
+    static void demoGetIrisFeature(){
+        String a_rdir = "0000_001.bmp";
+        System.out.println(getIrisFeature(a_rdir));
+    }
+    
     public static void main(String[] args) {
         //System.loadLibrary("Hello");
        System.out.println("welcome");
-       String feature = getIrisFeature("0000_000.bmp");
-       System.out.println(feature);
+       demoGetIrisFeature();
+       //String feature = getIrisFeature("0000_000.bmp");
+       //System.out.println(feature);
     }
 
     private static native void sayHello();

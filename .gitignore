@@ -1,4 +1,3 @@
-interface/lib
-interface/target
+
 *.class
 *.log
