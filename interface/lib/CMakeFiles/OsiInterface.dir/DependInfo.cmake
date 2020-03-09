@@ -4,11 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ninn/jnidemo/osiris_jni_interface/interface/src/OsiCircle.cpp" "/home/ninn/jnidemo/osiris_jni_interface/interface/lib/CMakeFiles/OsiInterface.dir/src/OsiCircle.cpp.o"
-  "/home/ninn/jnidemo/osiris_jni_interface/interface/src/OsiEye.cpp" "/home/ninn/jnidemo/osiris_jni_interface/interface/lib/CMakeFiles/OsiInterface.dir/src/OsiEye.cpp.o"
-  "/home/ninn/jnidemo/osiris_jni_interface/interface/src/OsiMain.cpp" "/home/ninn/jnidemo/osiris_jni_interface/interface/lib/CMakeFiles/OsiInterface.dir/src/OsiMain.cpp.o"
-  "/home/ninn/jnidemo/osiris_jni_interface/interface/src/OsiManager.cpp" "/home/ninn/jnidemo/osiris_jni_interface/interface/lib/CMakeFiles/OsiInterface.dir/src/OsiManager.cpp.o"
-  "/home/ninn/jnidemo/osiris_jni_interface/interface/src/OsiProcessings.cpp" "/home/ninn/jnidemo/osiris_jni_interface/interface/lib/CMakeFiles/OsiInterface.dir/src/OsiProcessings.cpp.o"
+  "/home/ninn/bishe/osiris_jni_interface/interface/src/OsiCircle.cpp" "/home/ninn/bishe/osiris_jni_interface/interface/target/CMakeFiles/OsiInterface.dir/src/OsiCircle.cpp.o"
+  "/home/ninn/bishe/osiris_jni_interface/interface/src/OsiEye.cpp" "/home/ninn/bishe/osiris_jni_interface/interface/target/CMakeFiles/OsiInterface.dir/src/OsiEye.cpp.o"
+  "/home/ninn/bishe/osiris_jni_interface/interface/src/OsiMain.cpp" "/home/ninn/bishe/osiris_jni_interface/interface/target/CMakeFiles/OsiInterface.dir/src/OsiMain.cpp.o"
+  "/home/ninn/bishe/osiris_jni_interface/interface/src/OsiManager.cpp" "/home/ninn/bishe/osiris_jni_interface/interface/target/CMakeFiles/OsiInterface.dir/src/OsiManager.cpp.o"
+  "/home/ninn/bishe/osiris_jni_interface/interface/src/OsiProcessings.cpp" "/home/ninn/bishe/osiris_jni_interface/interface/target/CMakeFiles/OsiInterface.dir/src/OsiProcessings.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -1,4 +1,4 @@
-# Install script for directory: /home/ninn/jnidemo/osiris_jni_interface/interface
+# Install script for directory: /home/ninn/bishe/osiris_jni_interface/interface
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/ninn/jnidemo/osiris_jni_interface/interface/lib/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ninn/bishe/osiris_jni_interface/interface/target/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

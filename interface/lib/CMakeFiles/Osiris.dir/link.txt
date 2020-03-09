@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/Osiris.dir/src/OsiCircle.cpp.o CMakeFiles/Osiris.dir/src/OsiEye.cpp.o CMakeFiles/Osiris.dir/src/OsiMain.cpp.o CMakeFiles/Osiris.dir/src/OsiManager.cpp.o CMakeFiles/Osiris.dir/src/OsiProcessings.cpp.o  -o Osiris  -L/usr/local/cuda/lib64 
