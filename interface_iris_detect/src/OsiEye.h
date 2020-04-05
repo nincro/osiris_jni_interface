@@ -94,7 +94,7 @@ namespace osiris
         */
         void saveMask ( const std::string & rFilename ) ;
         void setMaskRdir(const std::string & rdir);
-        void getMaskRdir();
+        std::string getMaskRdir();
         /** Save the normalized image corresponding to the eye.
         * @param rFilename Complete path of the image
         * @return void
