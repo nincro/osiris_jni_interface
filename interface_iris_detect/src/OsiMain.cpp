@@ -81,14 +81,14 @@ using namespace osiris ;
 JNIEXPORT jstring JNICALL Java_jni_JniInterface_irisDetect
   (JNIEnv * env, jclass cla, jstring rdir){
 	std::cout << " Java_jni_JniInterface_irisDetect" << std::endl;
-	const char* str = env->GetStringUTFChars(jimg_rdir, 0);
+	const char* str = env->GetStringUTFChars(rdir, 0);
 	std::string img_rdir = str;
 	try {
 		OsiManager osi;
 		osi.loadFeatureExtractConfiguration("data");
 		osi.showConfiguration();
 		std::string mask_rdir = osi.IrisDetect(img_rdir);
-		env->ReleaseStringUTFChars(jimg_rdir, 0);
+		env->ReleaseStringUTFChars(rdir, 0);
 		return env->NewStringUTF(mask_rdir.c_str());
 	}
 	
@@ -99,7 +99,7 @@ JNIEXPORT jstring JNICALL Java_jni_JniInterface_irisDetect
 }
 int main (int argc, char * argv[])
 {
-
+	
     return 0 ;
 
 }
