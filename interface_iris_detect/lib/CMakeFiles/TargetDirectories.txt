@@ -1,0 +1,3 @@
+/home/ninn/bishe/osiris_jni_interface/interface_iris_detect/lib/CMakeFiles/rebuild_cache.dir
+/home/ninn/bishe/osiris_jni_interface/interface_iris_detect/lib/CMakeFiles/OsiInterface.dir
+/home/ninn/bishe/osiris_jni_interface/interface_iris_detect/lib/CMakeFiles/edit_cache.dir
