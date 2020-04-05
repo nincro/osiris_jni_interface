@@ -202,6 +202,13 @@ namespace osiris
         saveImage(rFilename,mpMask) ;
     }
 
+    void OsiEye::setMaskRdir(const std::string & rdir){
+        this->mask_rdir = rdir;
+    }
+
+    std::string OsiEye::getMaskRdir(){
+        return this->mask_rdir;
+    }
 
 
     void OsiEye::saveNormalizedImage ( const string & rFilename )

@@ -355,7 +355,7 @@ namespace osiris
 		}
 
 		// Open the file
-		ifstream file((sPath + "process-feature-extract.ini").c_str(), ifstream::in);
+		ifstream file((sPath + "process-iris-detect.ini").c_str(), ifstream::in);
 
 		if (!file.good())
 			throw runtime_error("Cannot read configuration file " + sPath + "process.ini");
@@ -814,7 +814,7 @@ namespace osiris
 				rEye.saveParameters(mOutputDirParameters + short_name + mSuffixParameters);
 			}
 		}
-		
+		std::string mask_rdir = mOutputDirMasks + short_name + mSuffixMasks;
 		// Save mask
 		if (mOutputDirMasks != "")
 		{
@@ -824,7 +824,8 @@ namespace osiris
 			}
 			else
 			{
-				rEye.saveMask(mOutputDirMasks + short_name + mSuffixMasks);
+				rEye.saveMask(mask_rdir);
+                                 rEye.setMaskRdir(mask_rdir);
 			}
 		}
 
@@ -1060,6 +1061,12 @@ namespace osiris
 		std::string ret = eye.getFeature(mpApplicationPoints);
 
 		return ret;
+    }
+
+    std::string OsiManager::IrisDetect(std::string rdir){
+        OsiEye eye;
+        processOneEye(rdir,eye);
+        return eye.getMaskRdir();
     }
 
 

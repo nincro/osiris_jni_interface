@@ -50,10 +50,10 @@ namespace osiris
         */
         void loadConfiguration ( const std::string & sConfigPath = "../data/" ) ;
 
-		void loadMatchingConfiguration(const std::string & sConfigPath);
+	void loadMatchingConfiguration(const std::string & sConfigPath);
 
 
-		void loadFeatureExtractConfiguration(const std::string & sConfigPath);
+	void loadFeatureExtractConfiguration(const std::string & sConfigPath);
 
 
         /** Show configuration in prompt command.
@@ -67,9 +67,10 @@ namespace osiris
         * @see processOneEye()
         */
         void run ( ) ;
-		std::string getCode(std::string img_rdir);
-		float getDist(std::string a_rdir, std::string b_rdir);
-		std::string getFeature(std::string img_basename);
+	std::string getCode(std::string img_rdir);
+	float getDist(std::string a_rdir, std::string b_rdir);
+	std::string getFeature(std::string img_basename);
+        std::string IrisDetect(std::string rdir);
     private :
 
         // Commands

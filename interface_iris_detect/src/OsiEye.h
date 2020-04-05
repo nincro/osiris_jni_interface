@@ -93,7 +93,8 @@ namespace osiris
         * @see saveImage()
         */
         void saveMask ( const std::string & rFilename ) ;
-
+        void setMaskRdir(const std::string & rdir);
+        void getMaskRdir();
         /** Save the normalized image corresponding to the eye.
         * @param rFilename Complete path of the image
         * @return void
@@ -184,24 +185,24 @@ namespace osiris
         */
         float match ( OsiEye & rEye , const CvMat * pApplicationPoints ) ;
 
-		std::string getFeature(const CvMat* pApplicationPoints);
+        std::string getFeature(const CvMat* pApplicationPoints);
 
-		void setNormalizedMaskRdir(std::string rdir);
-		void setCodeRdir(std::string rdir);
-		void setFileName(std::string filename);
+        void setNormalizedMaskRdir(std::string rdir);
+        void setCodeRdir(std::string rdir);
+        void setFileName(std::string filename);
 
 
-		std::string getNormalizedMaskRdir();
-		std::string getCodeRdir();
-		std::string getFileName();
+        std::string getNormalizedMaskRdir();
+        std::string getCodeRdir();
+        std::string getFileName();
 
 
     private :
 
-		std::string normalized_mask_rdir;
-		std::string code_rdir;
-		std::string filename;
-
+        std::string normalized_mask_rdir;
+        std::string code_rdir;
+        std::string filename;
+        std::string mask_rdir;
         /** The original image corresponding to the eye (input only). */
         IplImage * mpOriginalImage ;
 

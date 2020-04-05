@@ -80,42 +80,16 @@
 using namespace osiris ;
 JNIEXPORT jstring JNICALL Java_jni_JniInterface_irisDetect
   (JNIEnv * env, jclass cla, jstring rdir){
-
-}
-
-JNIEXPORT jstring JNICALL Java_com_ninn_service_JniImpl_getCodeAndMask
-(JNIEnv * env, jobject cla, jstring jimg_rdir){
-	std::cout << "jni:featureExtract" << std::endl;
+	std::cout << " Java_jni_JniInterface_irisDetect" << std::endl;
 	const char* str = env->GetStringUTFChars(jimg_rdir, 0);
 	std::string img_rdir = str;
 	try {
 		OsiManager osi;
 		osi.loadFeatureExtractConfiguration("data");
 		osi.showConfiguration();
-		std::string strCodeAndMask = osi.getCode(img_rdir);
+		std::string mask_rdir = osi.IrisDetect(img_rdir);
 		env->ReleaseStringUTFChars(jimg_rdir, 0);
-		return env->NewStringUTF(strCodeAndMask.c_str());
-	}
-	
-	catch (std::exception & e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-
-}
-
-JNIEXPORT jstring JNICALL Java_com_ninn_service_JniImpl_getIrisFeature
-(JNIEnv * env, jobject cla, jstring jimg_basename){
-	std::cout << "jni:getIrisFeature" << std::endl;
-	const char* str = env->GetStringUTFChars(jimg_basename, 0);
-	std::string img_basename = str;
-	try {
-		OsiManager osi;
-		osi.loadFeatureExtractConfiguration("data");
-		osi.showConfiguration();
-		std::string strCodeAndMask = osi.getFeature(img_basename);
-		env->ReleaseStringUTFChars(jimg_basename, 0);
-		return env->NewStringUTF(strCodeAndMask.c_str());
+		return env->NewStringUTF(mask_rdir.c_str());
 	}
 	
 	catch (std::exception & e)
@@ -123,73 +97,9 @@ JNIEXPORT jstring JNICALL Java_com_ninn_service_JniImpl_getIrisFeature
 		std::cout << e.what() << std::endl;
 	}
 }
-
-
-JNIEXPORT jfloat JNICALL Java_JniImpl_matching
-(JNIEnv * env, jclass cla, jstring jstr_a_rdir, jstring jstr_b_rdir) {
-
-	std::cout << "jni:matching" << std::endl;
-	const char* a = env->GetStringUTFChars(jstr_a_rdir, 0);
-	const char* b = env->GetStringUTFChars(jstr_b_rdir, 0);
-	std::string a_rdir = a;
-	std::string b_rdir = b;
-	try {
-		OsiManager osi;
-		osi.loadMatchingConfiguration("data");
-		osi.showConfiguration();
-		float dist = osi.getDist(a_rdir, b_rdir);
-		return (jfloat)dist;
-	}
-	catch (std::exception & e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-}
-
-/**
-*/
-//std::string getCode(std::string img_rdir) {
-//	try
-//	{
-//		OsiManager osi;
-//		osi.loadConfiguration("data");
-//		osi.showConfiguration();
-//		osi.getCode(img_rdir);
-//		return std::string();
-//	}
-//	catch (std::exception & e)
-//	{
-//		std::cout << e.what() << std::endl;
-//	}
-//
-//	return NULL;
-//}
-//
-//std::string getCodeAndMask(std::string img_rdir) {
-//	try
-//	{
-//		OsiManager osi;
-//		osi.loadConfiguration("data");
-//		osi.showConfiguration();
-//		osi.getCode(img_rdir);
-//		return std::string();
-//	}
-//	catch (std::exception & e)
-//	{
-//		std::cout << e.what() << std::endl;
-//	}
-//
-//	return NULL;
-//}
-//
-//JNIEXPORT void JNICALL Java_Demo_sayHello
-//(JNIEnv *, jclass) {
-//	getCode("0000_000.bmp");
-//
-//}
 int main (int argc, char * argv[])
 {
-	
+
     return 0 ;
 
 }
